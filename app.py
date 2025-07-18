@@ -18,14 +18,21 @@ if st.button("Generate Copy"):
     Do not use superlatives or make off-label claims.
     """
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "You are a compliance-aware pharma copywriter."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=600,
-        temperature=0.7
+  from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": user_input}
+    ],
+    temperature=0.7
+)
+
+output = response.choices[0].message.content
+
     )
 
     output = response['choices'][0]['message']['content']
